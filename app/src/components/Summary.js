@@ -1,15 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Row from './Row'
 import styled from 'styled-components'
 import { connect } from "react-redux";
 import {numberWithCommas} from './formatters/numberWithCommas'
-import axios from 'axios'
+import {fetchPrice} from '../actions/index'
 
-const Summary = ({price, bitcoin, value}) => {
-
-    axios.get('https://api.coingecko.com/api/v3/coins/bitcoin?localization=en')
-    .then(({data}) => console.log(data.market_data.current_price.cad))
+const Summary = ({price, bitcoin, value, fetchPrice}) => {
     
+    useEffect(() => {
+        fetchPrice()
+    }, [])
+
     return (
         <SummaryBox>
             <Row title='Bitcoin' value={'$' + numberWithCommas(price)}/>
@@ -36,5 +37,7 @@ const mapStateToProps = (state) => {
       value: state.value()
     }
   }
+
+const mapDispatchToProps = { fetchPrice }
   
-  export default connect(mapStateToProps)(Summary);
+  export default connect(mapStateToProps, mapDispatchToProps)(Summary);
