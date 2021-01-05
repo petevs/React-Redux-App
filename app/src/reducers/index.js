@@ -1,6 +1,7 @@
 const initialState = {
     price: 0,
     bitcoin: 9.02273849,
+    amountInvested: 134095,
     isFetching: false,
     error: "",
     value() {
