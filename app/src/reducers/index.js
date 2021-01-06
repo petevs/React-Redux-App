@@ -1,35 +1,8 @@
-const initialState = {
-    price: 0,
-    bitcoin: 9.02273849,
-    amountInvested: 134095,
-    isFetching: false,
-    error: "",
-    value() {
-        return Math.round(this.price * this.bitcoin)
-    }
-}
+import {combineReducers} from 'redux'
+import { currentPriceReducer } from './currentPriceReducer'
+import { historicalPriceReducer } from './historicalPriceReducer'
 
-export const appReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case "FETCHING_PRICE_START":
-        return {
-          ...state,
-          isFetching: true
-        }
-        case "FETCHING_PRICE_SUCCESS":
-        return {
-          ...state,
-          isFetching: false,
-          error: "",
-          price: action.payload
-        }
-        case "FETCHING_PRICE_ERROR":
-        return {
-          ...state,
-          isFetching: false,
-          error: action.payload,
-        }
-      default:
-        return state;
-    }
-  }
+export const rootReducer = combineReducers({
+    currentPriceReducer: currentPriceReducer,
+    historicalPriceReducer: historicalPriceReducer
+})

@@ -47,10 +47,10 @@ const SummaryBox = styled.div`
 
 const mapStateToProps = (state) => {
     return {
-      price: state.price,
-      bitcoin: state.bitcoin,
-      value: state.value(),
-      amountInvested: state.amountInvested
+      price: state.currentPriceReducer.price,
+      bitcoin: state.currentPriceReducer.bitcoin,
+      value: state.currentPriceReducer.value(),
+      amountInvested: state.currentPriceReducer.amountInvested
     }
   }
 
